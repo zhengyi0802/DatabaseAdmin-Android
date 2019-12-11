@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.mundi.databaseadmin.database.TablesClass;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +21,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private final Context mContext;
     private static int pos = 0;
-    private ArrayList<String> mList =  null;
+    private List<TablesClass> mList =  null;
     private List<Fragment> mFragments;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm,
-                                List<Fragment> fragments, ArrayList<String> titles) {
+                                List<Fragment> fragments, List<TablesClass> titles) {
         super(fm);
         mContext = context;
         mFragments = fragments;
@@ -43,7 +45,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         setPos(position);
-        return mList.get(position);
+        return mList.get(position).getTitle();
     }
 
     @Override
@@ -61,7 +63,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     }
 
     public void add(Class<PlaceholderFragment> c, String uri, String dbname,
-                    String tablename, int i) {
+                    TablesClass tablename, int i) {
         mFragments.add(PlaceholderFragment.newInstance(i, uri, dbname, tablename));
         mList.add(tablename);
     }

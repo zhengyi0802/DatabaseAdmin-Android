@@ -17,6 +17,7 @@ import com.mundi.databaseadmin.R;
 import com.mundi.databaseadmin.bean.CellData;
 import com.mundi.databaseadmin.bean.ColumnTitle;
 import com.mundi.databaseadmin.bean.RowTitle;
+import com.mundi.databaseadmin.database.TablesClass;
 import com.mundi.databaseadmin.viewmodel.UserTablesViewModel;
 
 import java.util.ArrayList;
@@ -46,13 +47,14 @@ public class PlaceholderFragment extends Fragment implements ExcelPanel.OnLoadMo
     private String tablename;
     private int index;
 
-    public static PlaceholderFragment newInstance(int index, String uri, String dbname, String tablename) {
+    public static PlaceholderFragment newInstance(int index, String uri, String dbname,
+                                                  TablesClass tablename) {
         Log.d(TAG, "newInstance index = " + index);
         PlaceholderFragment fragment = new PlaceholderFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(ARG_SECTION_NUMBER, index);
         bundle.putString(ARG_SECTION_DBNAME, dbname);
-        bundle.putString(ARG_SECTION_TABLENAME, tablename);
+        bundle.putString(ARG_SECTION_TABLENAME, tablename.getTablename());
         fragment.setArguments(bundle);
         return fragment;
     }

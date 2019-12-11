@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.mundi.databaseadmin.database.ListTables;
+import com.mundi.databaseadmin.database.TablesClass;
 import com.mundi.databaseadmin.ui.main.PlaceholderFragment;
 import com.mundi.databaseadmin.ui.main.SectionsPagerAdapter;
 
@@ -59,14 +60,14 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             Log.d(TAG, "uri = " + uri + " dbname = " + dbname);
             ListTables listTables = new ListTables(uri, dbname);
-            ArrayList<String> tables = listTables.getTables();
+            List<TablesClass> tables = listTables.getTablesClass();
             List<Fragment> mFragments = buildFragments(tables);
             initAdapter(mFragments, tables);
             return;
         }
     };
 
-    private void initAdapter(List<Fragment> fragments, ArrayList<String> list) {
+    private void initAdapter(List<Fragment> fragments, List<TablesClass> list) {
         sectionsPagerAdapter = new SectionsPagerAdapter(this,
                 getSupportFragmentManager(), fragments, list);
         Log.d(TAG, "sectionsPagerAdapter count = " + sectionsPagerAdapter.getCount());
@@ -78,21 +79,22 @@ public class MainActivity extends AppCompatActivity {
         return;
     }
 
-    public void addNewFragment(String dbname, int i) {
+    public void addNewFragment(String dbname, TablesClass table, int i) {
         Bundle b = new Bundle();
         b.putInt("position", i);
-        sectionsPagerAdapter.add(PlaceholderFragment.class, uri, dbname, dbname, i);
+        sectionsPagerAdapter.add(PlaceholderFragment.class, uri, dbname, table, i);
         sectionsPagerAdapter.notifyDataSetChanged();
         return;
     }
 
-    private List<Fragment> buildFragments(ArrayList<String> list) {
+    private List<Fragment> buildFragments(List<TablesClass> list) {
         Log.d(TAG, "buildFragments list.size = " + list.size());
         List<Fragment> fragments = new ArrayList<Fragment>();
         for(int i = 0; i < list.size(); i++) {
             Bundle b = new Bundle();
             b.putInt("position", i);
-            fragments.add(PlaceholderFragment.newInstance(i, uri, dbname, list.get(i)));
+            fragments.add(PlaceholderFragment.newInstance(i,
+                    uri, dbname, list.get(i)));
         }
         return fragments;
     }

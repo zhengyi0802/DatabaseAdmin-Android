@@ -133,7 +133,7 @@ public class UserTablesViewModel extends ViewModel {
                 JSONObject object = array.getJSONObject(i);
                 Iterator<String> sIterator = object.keys();
                 pos = 0;
-                index = 0;
+                index = 1;
                 while(sIterator.hasNext()) {
                     String key = sIterator.next();
                     String value = object.getString(key);

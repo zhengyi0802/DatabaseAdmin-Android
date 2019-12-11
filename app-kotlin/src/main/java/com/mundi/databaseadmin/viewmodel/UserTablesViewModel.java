@@ -141,8 +141,6 @@ public class UserTablesViewModel extends ViewModel {
                         index = Integer.parseInt(value);
                         RowTitle mRowTitle = new RowTitle(index);
                         mRowTitleList.add(mRowTitle);
-                    } else if (key.equals("active_id")) {
-                        continue;
                     } else {
                         String fieldstr = "VARCHAR(255)";
                         if (index == 1) {

@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Databaseadmin</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+
+    <string name="text_databases_title">Databases :</string>
+    <string name="text_new_db_title">New Database :</string>
+    <string name="btn_new_text">New</string>
+    <string name="text_tables_title">Tables :</string>
+    <string name="text_new_table_title">New Table :</string>
+    <string name="text_usertables_title">User tables :</string>
+    <string name="btn_ok">Ok</string>
+    <string name="btn_cancel">Cancel</string>
+
+    <string name="table_column_index">Index</string>
+    <string name="table_column_A" translatable="false">A</string>
+    <string name="table_column_B" translatable="false">B</string>
+    <string name="table_column_C" translatable="false">C</string>
+    <string name="table_column_D" translatable="false">D</string>
+    <string name="table_column_E" translatable="false">E</string>
+    <string name="table_column_F" translatable="false">F</string>
+    <string name="table_column_G" translatable="false">G</string>
+    <string name="table_column_H" translatable="false">H</string>
+    <string name="table_column_I" translatable="false">I</string>
+    <string name="table_column_J" translatable="false">J</string>
+    <string name="table_column_K" translatable="false">K</string>
+    <string name="table_column_L" translatable="false">L</string>
+    <string name="table_column_M" translatable="false">M</string>
+    <string name="table_column_N" translatable="false">N</string>
+    <string name="table_column_O" translatable="false">O</string>
+    <string name="table_column_P" translatable="false">P</string>
+    <string name="table_column_Q" translatable="false">Q</string>
+    <string name="table_column_R" translatable="false">R</string>
+    <string name="table_column_S" translatable="false">S</string>
+    <string name="table_column_T" translatable="false">T</string>
+    <string name="table_column_U" translatable="false">U</string>
+    <string name="table_column_V" translatable="false">V</string>
+    <string name="table_column_W" translatable="false">W</string>
+    <string name="table_column_X" translatable="false">X</string>
+    <string name="table_column_Y" translatable="false">Y</string>
+    <string name="table_column_Z" translatable="false">Z</string>
+
+    <string name="url_dbweb" translatable="false">http://db.mundi-tv.tk/mobile.php</string>
+
+</resources>

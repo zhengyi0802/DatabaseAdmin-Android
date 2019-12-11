@@ -117,7 +117,7 @@ public class BackendConnection {
         Log.d(TAG, "getArrayListString()");
         try {
             JSONArray array = new JSONArray(responseString);
-            ArrayList mList = new ArrayList<TableClass>();
+            ArrayList mList = new ArrayList<String>();
             for (int i = 0; i < array.length(); i++) {
                 mList.add(array.getString(i));
                 Log.d(TAG, "list name = " + array.getString(i));

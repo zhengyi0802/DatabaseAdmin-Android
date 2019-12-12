@@ -11,8 +11,9 @@ import androidx.lifecycle.ViewModel;
 import com.mundi.databaseadmin.bean.CellData;
 import com.mundi.databaseadmin.bean.ColumnTitle;
 import com.mundi.databaseadmin.bean.RowTitle;
+import com.mundi.databaseadmin.database.FieldsClass;
 import com.mundi.databaseadmin.database.QueryData;
-import com.mundi.databaseadmin.database.TableClass;
+import com.mundi.databaseadmin.database.QueryFieldsAlias;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,6 +32,7 @@ public class UserTablesViewModel extends ViewModel {
     private MutableLiveData<List<List<CellData>>> mDataList;
     private MutableLiveData<ArrayList<RowTitle>> mRowList;
     private MutableLiveData<ArrayList<ColumnTitle>> mColumnList;
+    private List<FieldsClass> mFieldsClass;
     private Handler mHandler;
     private boolean remotedata = false;
     private String uri, dbname, tablename;
@@ -74,6 +76,10 @@ public class UserTablesViewModel extends ViewModel {
     private Runnable getData = new Runnable() {
         @Override
         public void run() {
+            QueryFieldsAlias queryFieldsAlias =
+                    new QueryFieldsAlias(uri, dbname, tablename);
+            mFieldsClass = queryFieldsAlias.getListData();
+            initColumnTitle();
             QueryData queryData = new QueryData(uri, dbname, tablename);
             JSONArray array = queryData.getData();
             parseData(array);
@@ -94,12 +100,21 @@ public class UserTablesViewModel extends ViewModel {
     private void initColumnTitle() {
         Log.d(TAG, "initColumnTitle!");
         ArrayList mColumnTitleList = new ArrayList<ColumnTitle>();
-        String fieldstr = "VARCHAR(30)";
-        for (int i = 1; i < INIT_COLUMNS; i++) {
-            int j = Integer.valueOf('A') + i - 1;
-            String str = Character.toString((char) j);
-            ColumnTitle mColumnTitle = new ColumnTitle(i, str, fieldstr);
-            mColumnTitleList.add(mColumnTitle);
+        if(remotedata) {
+            for (int i=0; i < mFieldsClass.size(); i++) {
+                String title = mFieldsClass.get(i).getTitle();
+                String field = mFieldsClass.get(i).getFieldname();
+                ColumnTitle mColumnTitle = new ColumnTitle(i, title, field);
+                Log.d(TAG, "field = " + field + "title = " + title);
+                mColumnTitleList.add(mColumnTitle);
+            }
+        } else {
+            for (int i = 1; i < INIT_COLUMNS; i++) {
+                int j = Integer.valueOf('A') + i - 1;
+                String str = Character.toString((char) j);
+                ColumnTitle mColumnTitle = new ColumnTitle(i, str, str);
+                mColumnTitleList.add(mColumnTitle);
+            }
         }
         mColumnList.setValue(mColumnTitleList);
         return;
@@ -124,15 +139,19 @@ public class UserTablesViewModel extends ViewModel {
         try {
             int index = 0;
             int pos = 0;
-            ArrayList mColumnTitleList = new ArrayList<ColumnTitle>();
+            //ArrayList mColumnTitleList = new ArrayList<ColumnTitle>();
             ArrayList mRowTitleList = new ArrayList<RowTitle>();
             List<List<CellData>> lldata = new ArrayList<List<CellData>>();
             // get column title from first record key
             for (int i = 0; i < array.length(); i++) {
-                List<CellData> lCellData = new ArrayList<CellData>();
                 JSONObject object = array.getJSONObject(i);
+                List<CellData> lCellData =
+                        new ArrayList<CellData>();
+                for (int j = 0; j < mFieldsClass.size(); j++) {
+                    CellData mCellData = new CellData(i, j, null);
+                    lCellData.add(mCellData);
+                }
                 Iterator<String> sIterator = object.keys();
-                pos = 0;
                 index = 1;
                 while(sIterator.hasNext()) {
                     String key = sIterator.next();
@@ -142,23 +161,26 @@ public class UserTablesViewModel extends ViewModel {
                         RowTitle mRowTitle = new RowTitle(index);
                         mRowTitleList.add(mRowTitle);
                     } else if (key.equals("active_id")) {
+                        if (value.equals("ACTIVATIVE")) {
+
+                        }
                         continue;
                     } else {
-                        String fieldstr = "VARCHAR(255)";
-                        if (index == 1) {
-                            ColumnTitle mColumnTitle = new ColumnTitle(pos, key, fieldstr);
-                            mColumnTitleList.add(mColumnTitle);
+                        for(pos = 0; pos < mFieldsClass.size(); pos++) {
+                            FieldsClass fieldsClass = mFieldsClass.get(pos);
+                            if(fieldsClass.getFieldname().equals(key)) {
+                                break;
+                            }
                         }
                         CellData mCellData = new CellData(i, pos, value);
-                        lCellData.add(mCellData);
-                        pos++;
+                        lCellData.set(pos, mCellData);
                     }
                     Log.d(TAG, "index = " + index + " pos = " + pos);
                     Log.d(TAG, "key = " + key + " value = " + value);
                 }
                 lldata.add(lCellData);
             }
-            mColumnList.setValue(mColumnTitleList);
+            //mColumnList.setValue(mColumnTitleList);
             mRowList.setValue(mRowTitleList);
             mDataList.setValue(lldata);
         } catch (Exception e) {

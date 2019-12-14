@@ -99,5 +99,6 @@
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:monitor:1.2.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/work/Workspace/Android/phoneapp/DatabaseAdmin-Android/barcodescaner-zbar/libs/zbar.jar:unspecified@jar" level="project" />
     <orderEntry type="module" module-name="barcodescaner-core" />
+    <orderEntry type="module" module-name="barcodescaner-core" />
   </component>
 </module>

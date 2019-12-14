@@ -8,7 +8,7 @@ public class Login {
     private BackendConnection backendConnection;
     public Login(String uri, String databasename, String username, String password) {
         Log.d(TAG, "Login()");
-        String cmd = "logina&dbname=" + databasename +
+        String cmd = "login&dbname=" + databasename +
                 "&username=" + username + "&password=" + password;
         backendConnection = new BackendConnection(uri, cmd);
     }

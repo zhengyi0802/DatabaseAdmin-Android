@@ -45,6 +45,7 @@ public class LoginViewModel extends ViewModel {
             Log.d(TAG, "getData()");
             Login login = new Login(uri, mdbname, mUsername, mPassword);
             String str = login.getResponseString();
+            Log.d(TAG, "response = " + str);
             mStr.setValue(str);
             return;
         }

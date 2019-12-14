@@ -1,5 +1,6 @@
 package com.mundi.databaseadmin;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import com.mundi.databaseadmin.database.ListTables;
 import com.mundi.databaseadmin.database.TablesClass;
@@ -28,11 +30,14 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    private static final int FUNC_LOGIN = 1;
 
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
     private String uri;
     private String dbname = "stocks";
+    private Button mButtonNew;
+    private Button mButtonSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +56,18 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        Handler mHandler = new Handler();
-        mHandler.postDelayed(delay, 1000);
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivityForResult(intent, FUNC_LOGIN);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Handler mHandler = new Handler();
+            mHandler.postDelayed(delay, 1000);
+        }
     }
 
     private Runnable delay = new Runnable() {
@@ -64,6 +79,18 @@ public class MainActivity extends AppCompatActivity {
             List<Fragment> mFragments = buildFragments(tables);
             initAdapter(mFragments, tables);
             return;
+        }
+    };
+
+    private Button.OnClickListener newListener = new Button.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int item = viewPager.getCurrentItem();
+            if (v == mButtonNew) {
+
+            } else if (v == mButtonSearch) {
+
+            }
         }
     };
 

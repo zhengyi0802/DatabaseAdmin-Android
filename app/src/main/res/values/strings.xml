@@ -1,16 +1,4 @@
 <resources>
-    <string name="app_name">Databaseadmin</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-
-    <string name="text_databases_title">Databases :</string>
-    <string name="text_new_db_title">New Database :</string>
-    <string name="btn_new_text">New</string>
-    <string name="text_tables_title">Tables :</string>
-    <string name="text_new_table_title">New Table :</string>
-    <string name="text_usertables_title">User tables :</string>
-    <string name="btn_ok">Ok</string>
-    <string name="btn_cancel">Cancel</string>
 
     <string name="table_column_index">Index</string>
     <string name="table_column_A" translatable="false">A</string>
@@ -41,5 +29,14 @@
     <string name="table_column_Z" translatable="false">Z</string>
 
     <string name="url_dbweb" translatable="false">http://db.mundi-tv.tk/mobile.php</string>
+
+    <string name="label_login">Login</string>
+    <string name="label_user">Username</string>
+    <string name="label_pass">Password</string>
+
+    <string name="btn_new">New Record</string>
+    <string name="btn_search">Search</string>
+    <string name="app_name">Stock Management</string>
+
 
 </resources>

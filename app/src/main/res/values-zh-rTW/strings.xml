@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btn_new">新增紀錄</string>
+    <string name="btn_search">搜尋</string>
+    <string name="app_name">倉儲管理系統</string>
+
+    <string name="label_login">Login</string>
+    <string name="label_user">Username</string>
+    <string name="label_pass">Password</string>
+
+    <string name="table_column_index">Index</string>
+
+</resources>

@@ -1,11 +1,9 @@
-package com.mundi.databaseadmin.com.mundi.databaseadmin.barcode;
+package com.mundi.databaseadmin;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import com.mundi.databaseadmin.R;
 
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
@@ -38,8 +36,9 @@ public class SimpleScannerActivity extends BaseScannerActivity implements ZBarSc
 
     @Override
     public void handleResult(Result rawResult) {
-        Toast.makeText(this, "Contents = " + rawResult.getContents() +
-                ", Format = " + rawResult.getBarcodeFormat().getName(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Contents = " + rawResult.getContents() +
+        //       ", Format = " + rawResult.getBarcodeFormat().getName(), Toast.LENGTH_SHORT).show();
+/*
         // Note:
         // * Wait 2 seconds to resume the preview.
         // * On older devices continuously stopping and resuming camera preview can result in freezing the app.
@@ -51,5 +50,11 @@ public class SimpleScannerActivity extends BaseScannerActivity implements ZBarSc
                 mScannerView.resumeCameraPreview(SimpleScannerActivity.this);
             }
         }, 2000);
+*/
+        Intent intent = new Intent();
+        intent.putExtra("format", rawResult.getBarcodeFormat().getName());
+        intent.putExtra("barcode", rawResult.getContents());
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

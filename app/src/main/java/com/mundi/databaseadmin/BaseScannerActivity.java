@@ -1,11 +1,9 @@
-package com.mundi.databaseadmin.com.mundi.databaseadmin.barcode;
+package com.mundi.databaseadmin;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
-
-import com.mundi.databaseadmin.R;
 
 public class BaseScannerActivity extends AppCompatActivity {
     public void setupToolbar() {

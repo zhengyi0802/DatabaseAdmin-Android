@@ -14,10 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.mundi.databaseadmin.database.ListTables;
 import com.mundi.databaseadmin.database.TablesClass;
@@ -31,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final int FUNC_LOGIN = 1;
+    private static final int FUNC_SCANBARCODE = 2;
 
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
@@ -47,15 +47,12 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         setContentView(R.layout.activity_main);
-        FloatingActionButton fab = findViewById(R.id.fab);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        mButtonNew = findViewById(R.id.btn_new);
+        mButtonSearch = findViewById(R.id.btn_search);
+
+        mButtonNew.setOnClickListener(newListener);
+        mButtonSearch.setOnClickListener(newListener);
 
         Intent intent = new Intent(this, LoginActivity.class);
         startActivityForResult(intent, FUNC_LOGIN);
@@ -64,9 +61,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
+        if (requestCode == FUNC_LOGIN && resultCode == RESULT_OK) {
             Handler mHandler = new Handler();
             mHandler.postDelayed(delay, 1000);
+        } else {
+            if (requestCode == FUNC_SCANBARCODE && resultCode == RESULT_OK) {
+                String barcode = data.getExtras().getString("barcode");
+                Toast.makeText(this, "barcode = " + barcode, Toast.LENGTH_SHORT)
+                        .show();
+            }
         }
     }
 
@@ -82,12 +85,20 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private void startBarcodeScan() {
+        Intent intent = new Intent(this, SimpleScannerActivity.class);
+        startActivityForResult(intent, FUNC_SCANBARCODE);
+    }
+
     private Button.OnClickListener newListener = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
             int item = viewPager.getCurrentItem();
             if (v == mButtonNew) {
-
+                int pos = viewPager.getCurrentItem();
+                if (sectionsPagerAdapter.getTablename(pos).equals("stock_in")) {
+                    startBarcodeScan();
+                }
             } else if (v == mButtonSearch) {
 
             }

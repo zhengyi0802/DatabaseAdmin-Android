@@ -81,7 +81,7 @@ public class PlaceholderFragment extends Fragment implements ExcelPanel.OnLoadMo
         dbname = getArguments().getString(ARG_SECTION_DBNAME);
         tablename = getArguments().getString(ARG_SECTION_TABLENAME);
         View root = inflater.inflate(R.layout.fragment_main, container, false);
-        mProgress = root.findViewById(R.id.progress);
+        //mProgress = root.findViewById(R.id.progress);
         mExcelPanel = root.findViewById(R.id.content_container);
         mAdapter = new SheetDataAdapter(getActivity(), blockListener);
         mExcelPanel.setAdapter(mAdapter);
@@ -118,7 +118,7 @@ public class PlaceholderFragment extends Fragment implements ExcelPanel.OnLoadMo
                     public void onChanged(List<List<CellData>> cellData) {
                         Log.d(TAG,"getCellData()");
                         mAdapter.setMajorData(cellData);
-                        mProgress.setVisibility(View.GONE);
+                        //mProgress.setVisibility(View.GONE);
                         mAdapter.enableFooter();
                         mAdapter.enableHeader();
                     }

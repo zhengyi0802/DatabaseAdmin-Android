@@ -83,6 +83,7 @@ public class UserTablesViewModel extends ViewModel {
             QueryData queryData = new QueryData(uri, dbname, tablename);
             JSONArray array = queryData.getData();
             parseData(array);
+            mHandler.removeCallbacks(getData);
         }
     };
 

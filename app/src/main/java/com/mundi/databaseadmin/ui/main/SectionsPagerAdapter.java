@@ -54,6 +54,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return mList.size();
     }
 
+    public String getTablename(int pos) {
+        return mList.get(pos).getTablename();
+    }
+
     public static int getPos() {
         return pos;
     }

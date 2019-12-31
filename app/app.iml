@@ -148,7 +148,5 @@
     <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout:1.1.3@aar" level="project" />
     <orderEntry type="module" module-name="barcodescaner-core" />
     <orderEntry type="module" module-name="barcodescaner-zbar" />
-    <orderEntry type="module" module-name="barcodescaner-core" />
-    <orderEntry type="module" module-name="barcodescaner-zbar" />
   </component>
 </module>
